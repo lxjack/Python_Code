@@ -1,8 +1,12 @@
 #_*_ coding: utf-8 _*_
 
+class LinkedListOperateError(ValueError):
+    '''自定义链表操作异常类'''
+    pass
+
 class Node():
     '''
-    返回链表单个节点
+    返回单个链表节点
     '''
     def __init__(self,element,next=None):
         self.element=element
@@ -11,37 +15,34 @@ class Node():
 class Llist():
 
     def __init__(self):
-        '''初始化空链表'''
+        '''1.初始化空链表'''
         self.head=None
 
-    def create_empty_list(self):
-        '''1.将链表置为空表'''
+    def delete_list(self):
+        '''2.删除链表'''
         self.head = None
 
     def is_empty_list(self):
-        '''2.判断链表是否为空链表'''
+        '''3.判断链表是否为空链表'''
         if self.head==None:
             return True
         else:
             return False
 
-    def length(self):
-        '''3.计算表长度'''
-        num=0
-        p=self.head
-        while p:
-            num=num+1
-            p=p.next
-        return num
+    def prepend(self,element):
+        '''4.1.表首端加入元素'''
+        pt = Node(element)
+        pt.next=self.head
+        self.head=pt
 
     def append(self,element):
-        '''4.表尾端加入元素'''
+        '''4.2.表尾端加入元素'''
 
         '''当表为空表时'''
         if self.head==None:
             pt=Node(element)
             self.head=pt
-            return 1
+
         '''当表不为空表时'''
         if self.head != None:
             '''寻找表尾节点'''
@@ -54,49 +55,26 @@ class Llist():
             '''创建节点 原表尾链接链接到新生成节点'''
             pt = Node(element)
             p.next=pt
-            return 1
 
-    def prepend(self,element):
-        '''5.表尾端加入元素'''
-        pt = Node(element)
-        pt.next=self.head
-        self.head=pt
+    def middle_pend(self,index,element):
+        '''4.3.根据索引在链表中间添加元素'''
+        pass
 
-    def index(self,i):
-        '''6.按下标进行元素索引'''
-
-        if self.head==None:
-            print "link list is empty."
-            return 1
-        elif i<0 or i>=self.length():
-            print "index is out of range."
-            return 1
-        else:
-            p=self.head
-            n=0
-            while p:
-                if n==i:
-                    break
-                else:
-                    p=p.next
-                    n=n+1
-            return p.element
 
     def prepop(self):
-        '''7.删除表首元素'''
+        '''5.1.删除表首元素'''
         if self.head==None:
-            print "link list is empty."
-            return 1
+            raise LinkedListOperateError("list is empty")
         else:
             et=self.head.element
             self.head=self.head.next
             return et
 
     def pop(self):
-        '''8.删除表尾元素'''
+        '''5.2.删除表尾元素'''
         if self.head==None:
-            print "link list is empty."
-            return 1
+            raise LinkedListOperateError("list is empty")
+
         elif self.length()==1:
             et=self.head.element
             self.head=None
@@ -113,37 +91,78 @@ class Llist():
             p.next=None
             return et
 
+    def middle_pop(self,index):
+        '''5.3.根据索引删除元素'''
+        pass
+
+    def find_node(self,index):
+        '''6.根据索引返回节点指针'''
+        if self.head==None:
+            raise LinkedListOperateError("list is empty")
+
+        if index<0 or index>=self.length():
+            raise LinkedListOperateError("list index out of range")
+
+        p=self.head
+        n=0
+        while True:
+            if n==index:
+                break
+            else:
+                p=p.next
+                n=n+1
+        return p
+
+    def index(self,i):
+        '''7.按下标进行元素索引'''
+        if self.head==None:
+            raise LinkedListOperateError("list is empty")
+
+        if i < 0 or i >= self.length():
+            raise LinkedListOperateError("list index out of range")
+
+        p=self.find_node(i)
+        return p.element
+
+    def modify_element(self,i,element):
+        '''8.根据索引修改节点元素'''
+        if self.head == None:
+            raise LinkedListOperateError("list is empty")
+
+        if i < 0 or i >= self.length():
+            raise LinkedListOperateError("list index out of range")
+
+        p = self.find_node(i)
+        p.element=element
+
+
+    def length(self):
+        '''9.计算表长度'''
+        num=0
+        p=self.head
+        while p:
+            num=num+1
+            p=p.next
+        return num
+
     def print_all_list(self):
-        '''9.打印表中所有元素'''
+        '''10.输出链表'''
         p=self.head
         if p==None:
-            print "empty list"
-            return 1
-        print ">>>list info begin:"
-        while p:
-            print p.element
-            p=p.next
-        print ">>>list info end."
+            print "[]"
+        else:
+            listinfo ="["
+            while p:
+                listinfo= listinfo + str(p.element) +","
+                p=p.next
 
+            listinfo=listinfo[:-1] + "]"
+            print listinfo
 
 
 l1=Llist()
-l1.append('a')
-l1.append('b')
-l1.append('c')
-l1.append('d')
+l1.prepend(1)
+l1.prepend(2)
+l1.prepend(3)
 
-print l1.pop()
-l1.print_all_list()
-
-print l1.pop()
-l1.print_all_list()
-
-print l1.pop()
-l1.print_all_list()
-
-print l1.pop()
-l1.print_all_list()
-
-print l1.pop()
 l1.print_all_list()
