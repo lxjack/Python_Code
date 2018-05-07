@@ -159,10 +159,11 @@ class Llist():
             listinfo=listinfo[:-1] + "]"
             print listinfo
 
+if __name__=="__main__":
+    '''demo'''
+    l1=Llist()
+    l1.prepend(1)
+    l1.prepend(2)
+    l1.prepend(3)
 
-l1=Llist()
-l1.prepend(1)
-l1.prepend(2)
-l1.prepend(3)
-
-l1.print_all_list()
+    l1.print_all_list()
