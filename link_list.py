@@ -42,6 +42,7 @@ class Llist():
         if self.head==None:
             pt=Node(element)
             self.head=pt
+            return
 
         '''当表不为空表时'''
         if self.head != None:
@@ -55,11 +56,19 @@ class Llist():
             '''创建节点 原表尾链接链接到新生成节点'''
             pt = Node(element)
             p.next=pt
+            return
 
     def middle_pend(self,index,element):
         '''4.3.根据索引在链表中间添加元素'''
-        pass
-
+        if self.length() < 2:
+            raise LinkedListOperateError("the length of list is less than 2,can not execute middle_pend")
+        if index <=0 or index>=self.length():
+            raise LinkedListOperateError("the input index can not execute middle_pend")
+        '''找到插入节点的前一节点，进行插入'''
+        p=self.find_node(index-1)
+        pt = Node(element)
+        pt.next=p.next
+        p.next=pt
 
     def prepop(self):
         '''5.1.删除表首元素'''
@@ -93,7 +102,16 @@ class Llist():
 
     def middle_pop(self,index):
         '''5.3.根据索引删除元素'''
-        pass
+        if self.length() <3:
+            raise LinkedListOperateError("the length of list is less than 3,can not execute middle_pop")
+        if index <=0 or index>=self.length()-1:
+            raise LinkedListOperateError("the input index can not execute middle_pop")
+
+        '''找到删除节点的前一节点'''
+        p = self.find_node(index - 1)
+        et = p.next.element
+        p.next = p.next.next
+        return et
 
     def find_node(self,index):
         '''6.根据索引返回节点指针'''
@@ -162,8 +180,7 @@ class Llist():
 if __name__=="__main__":
     '''demo'''
     l1=Llist()
-    l1.prepend(1)
-    l1.prepend(2)
-    l1.prepend(3)
+    l1.append(1)
+    l1.append(2)
 
     l1.print_all_list()
