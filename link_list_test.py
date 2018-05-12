@@ -336,6 +336,87 @@ class LlistTest(unittest.TestCase):
         value = temp_list.length()
         self.assertEqual(value, 4, "value_info " + str(value))
 
+    def test_index_insert(self):
+        '''
+        case13:测试index_insert函数
+
+        1、当链表为空时，在索引0插入元素'a'，索引index=0元素为'a'       
+        2、当链表为['a']时，在索引1插入元素'b'，索引index=1元素为'b'
+        3、当链表为['a','b']时，在索引1插入元素'c'，索引index=1元素为'c',索引index=2元素为'b'
+        4、当链表为['a','c','b']时，传入索引>=4或<=-1或非数字，抛出指定异常
+        '''
+        '''step 1'''
+        temp_list = Llist()
+        temp_list.index_insert(0,'a')
+        value =temp_list.index(0)
+        self.assertEqual(value, 'a', "value_info " + str(value))
+
+        '''step 2'''
+        temp_list.index_insert(1, 'b')
+        value = temp_list.index(1)
+        self.assertEqual(value, 'b', "value_info " + str(value))
+
+        '''step 3'''
+        temp_list.index_insert(1, 'c')
+        value = temp_list.index(1)
+        self.assertEqual(value, 'c', "value_info " + str(value))
+
+        value = temp_list.index(2)
+        self.assertEqual(value, 'b', "value_info " + str(value))
+
+        '''step 4'''
+        with self.assertRaisesRegexp(LinkedListOperateError, 'index is out of range or index not a integer'):
+            temp_list.index_insert(4, 'ccc')
+        with self.assertRaisesRegexp(LinkedListOperateError, 'index is out of range or index not a integer'):
+            temp_list.index_insert(-1, 'ccc')
+        with self.assertRaisesRegexp(LinkedListOperateError, 'index is out of range or index not a integer'):
+            temp_list.index_insert('aaa', 'ccc')
+
+    def test_index_pop(self):
+        '''
+        case14:测试index_pop函数
+
+        1、当链表为空时，删除空链表中元素，抛出指定异常   
+        2、当链表为[0,1,2,3,4,5,6]时，删除index=-1或7的元素，抛出指定异常   
+        3、当链表为[0,1,2,3,4,5,6]时,删除index=5和index=1的元素，元素删除正确，删除后链表长度为5
+        4、当链表为[0,2,3,4,6]时,删除index=0，元素删除正确
+        5、当链表为[2,3,4,6]时,删除index=3，元素删除正确，删除后链表长度为3
+        '''
+        '''step 1'''
+        temp_list = Llist()
+        with self.assertRaisesRegexp(LinkedListOperateError, 'list is empty'):
+            temp_list.index_pop(0)
+
+        '''step 2'''
+        for i in xrange(7):
+            temp_list.append(i)
+        with self.assertRaisesRegexp(LinkedListOperateError, 'index is out of range'):
+            temp_list.index_pop(-1)
+        with self.assertRaisesRegexp(LinkedListOperateError, 'index is out of range'):
+            temp_list.index_pop(7)
+
+        '''step 3'''
+        value = temp_list.index_pop(5)
+        self.assertEqual(value, 5, "value_info " + str(value))
+
+        value = temp_list.index_pop(1)
+        self.assertEqual(value, 1, "value_info " + str(value))
+
+        value = temp_list.length()
+        self.assertEqual(value, 5, "value_info " + str(value))
+
+        '''step 4'''
+        value = temp_list.index_pop(0)
+        self.assertEqual(value, 0, "value_info " + str(value))
+
+        '''step 5'''
+        value = temp_list.index_pop(3)
+        self.assertEqual(value, 6, "value_info " + str(value))
+
+        value = temp_list.length()
+        self.assertEqual(value, 3, "value_info " + str(value))
+
+
 if __name__=="__main__":
 
     unittest.main()

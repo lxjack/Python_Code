@@ -177,6 +177,41 @@ class Llist():
             listinfo=listinfo[:-1] + "]"
             print listinfo
 
+    def index_insert(self,i,element):
+        '''11.根据索引，向链表中插入元素'''
+        if i==0:
+            self.prepend(element)
+            return
+        elif i==self.length():
+            self.append(element)
+            return
+        elif i>=1 and i<=self.length()-1:
+            self.middle_pend(i,element)
+            return
+
+        raise LinkedListOperateError("index is out of range or index not a integer")
+
+    def index_pop(self,i):
+        '''13.根据索引，删除链表元素'''
+        if self.head==None:
+            raise LinkedListOperateError("list is empty")
+
+        if i<0 or i>=self.length():
+            raise LinkedListOperateError("index is out of range")
+
+        if i == 0:
+            et=self.prepop()
+            return et
+
+        elif i == self.length()-1:
+            et=self.pop()
+            return et
+
+        elif i >= 1 and i <= self.length() - 1:
+            et=self.middle_pop(i)
+            return et
+
+
 if __name__=="__main__":
     '''demo'''
     l1=Llist()
