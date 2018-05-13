@@ -207,7 +207,7 @@ class Llist():
             et=self.pop()
             return et
 
-        elif i >= 1 and i <= self.length() - 1:
+        elif i >= 1 and i <= self.length() - 2:
             et=self.middle_pop(i)
             return et
 
