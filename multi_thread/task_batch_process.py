@@ -2,6 +2,9 @@
 from time import sleep,ctime
 import threading
 
+#function:
+#使用线程并发处理具有相同order的任务，处理完成之后，再处理下一顺序order
+
 work_quence=[(1,1),(1,2),(1,3),(1,4),(1,5),(2,1),(2,2),(2,3),(2,4),(2,5)]
 thread_resource=0
 thread_resource_limit=2
