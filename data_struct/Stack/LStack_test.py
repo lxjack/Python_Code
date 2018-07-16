@@ -1,10 +1,10 @@
 #_*_ coding: utf-8 _*_
 import unittest
-from SStack import Seq_Stack
-from SStack import StackUnderflow
+from LStack import Link_Stack
+from LStack import StackUnderflow
 
-class Seq_StackTest(unittest.TestCase):
-    '''my sequence stack unittest'''
+class Link_StackTest(unittest.TestCase):
+    '''my link stack unittest'''
 
     def setUp(self):
         pass
@@ -20,7 +20,7 @@ class Seq_StackTest(unittest.TestCase):
            2、当栈表不为空时返回False
         '''
         '''step1'''
-        temp_stack = Seq_Stack()
+        temp_stack = Link_Stack()
         value = temp_stack.is_empty_stack()
         self.assertEqual(value, True, "value_info " + str(value))
 
@@ -36,7 +36,7 @@ class Seq_StackTest(unittest.TestCase):
         2、栈存在2个元素[1，2],调用length函数，返回栈长度为2
         '''
         '''step 1'''
-        temp_stack = Seq_Stack()
+        temp_stack = Link_Stack()
         value = temp_stack.length()
         self.assertEqual(value, 0, "value_info " + str(value))
 
@@ -55,7 +55,7 @@ class Seq_StackTest(unittest.TestCase):
         2、栈存在2个元素[1，2],调用top函数，返回元素值为2，并且栈长度为2
         '''
         '''step 1'''
-        temp_stack = Seq_Stack()
+        temp_stack = Link_Stack()
         with self.assertRaisesRegexp(StackUnderflow, 'stack is empty'):
             temp_stack.top()
 
@@ -74,7 +74,7 @@ class Seq_StackTest(unittest.TestCase):
         2、往栈中再添加素'b',查询栈顶元素为'b'，并且栈长度为2
         '''
         '''step 1'''
-        temp_stack = Seq_Stack()
+        temp_stack = Link_Stack()
         temp_stack.push('a')
         value = temp_stack.top()
         self.assertEqual(value, 'a', "value_info " + str(value))
@@ -95,7 +95,7 @@ class Seq_StackTest(unittest.TestCase):
         3、栈为['a'],弹出栈顶元素，弹出栈顶元素为'a'，栈长度为0
         '''
         '''step 1'''
-        temp_stack = Seq_Stack()
+        temp_stack = Link_Stack()
         with self.assertRaisesRegexp(StackUnderflow, 'stack is empty'):
             temp_stack.pop()
 
