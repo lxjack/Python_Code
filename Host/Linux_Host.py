@@ -47,7 +47,7 @@ class Linux_Host():
 
 
 if __name__=="__main__":
-    host=Linux_Host('192.168.225.129', port=22, username='root', password='lx20117335')
+    host=Linux_Host('****', port=22, username='root', password='**')
     rece_info=host.cmd("cat -n /home/jack/workspace/temp.txt")
     print  rece_info
     host.close_connection()
