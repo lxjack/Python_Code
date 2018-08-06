@@ -14,9 +14,9 @@ class LlistTest(unittest.TestCase):
         pass
 
     def test_is_empty_list(self):
+        "case1:test is_empty_list function"
+
         '''
-        case1:测试函数is_empty_list功能 
-        
         1、当链表为空时返回True
         2、当链表不为空时返回False
         '''
