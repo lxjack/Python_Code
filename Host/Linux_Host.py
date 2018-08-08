@@ -3,7 +3,7 @@ import paramiko
 from time import sleep
 
 class Linux_Host():
-
+    '''linux 主机远程链接类'''
     def __init__(self,ip,port=22,username='root',password=""):
         #初始化一个对谈窗口
         self.ssh = paramiko.SSHClient()
@@ -40,7 +40,7 @@ class Linux_Host():
             if self.echostr[-self.ps1_len:] == self.end:
                 print "receive info end"
                 break
-        #删除回显中cmdstr和终端命令提示符self.end
+        #删除回显中cmdstr和终端命令提示符self.end 获取命令下发得到的实际回显
         self.echostr=self.echostr.replace(cmdstr+"\r\n","",1)
         self.echostr = self.echostr.replace(self.end,"", 1)
         return self.echostr
