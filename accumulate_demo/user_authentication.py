@@ -3,7 +3,7 @@ import hashlib
 import sys
 import getopt
 import os
-from py_mysql.mysql_hander import Mysql_Hander
+from py_mysql import Mysql_Hander
 
 def usage():
     usage_info = '''
