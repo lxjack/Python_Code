@@ -1,0 +1,2 @@
+hello,welcome to wx_auto_send world.  欢迎
+
